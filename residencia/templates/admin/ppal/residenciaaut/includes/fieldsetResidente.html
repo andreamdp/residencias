@@ -1,0 +1,37 @@
+<fieldset class="module aligned {{ fieldset.classes }}">
+     {% if fieldset.name %}
+         {% if fieldset.name == 'Cantidad Residentes' %}<span style="font-weight:bold"><a href="lista/" >Listado Residentes</a></span>{% endif %}
+        {% endif %}
+       
+    {% if fieldset.description %}
+        <div class="description">{{ fieldset.description|safe }}</div>
+    {% endif %}
+    {% for line in fieldset %}
+        <div class="form-row{% if line.fields|length_is:'1' and line.errors %} errors{% endif %}{% for field in line %}{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% endfor %}">
+            {% if line.fields|length_is:'1' %}{{ line.errors }}{% endif %}
+            {% for field in line %}
+                <div{% if not line.fields|length_is:'1' %} class="field-box{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% if not field.is_readonly and field.errors %} errors{% endif %}"{% endif %}>
+                    {% if not line.fields|length_is:'1' and not field.is_readonly %}{{ field.errors }}{% endif %}
+                    {% if field.is_checkbox %}
+                        {{ field.field }}{{ field.label_tag }}
+                    {% else %}
+                        {{ field.label_tag }}
+                        {% if field.is_readonly %}
+                            <p>{{ field.contents }}</p>
+                        {% else %}
+      <p>  {% if field.field.name == 'cantA_1' %} <a href="residente1/" >Informacion de Residentes</a> {% endif %}</p>
+	 {% if field.field.name == 'cantA_2' %}<a href="residente2/" >Informacion de Residentes</a> {% endif %}
+	{% if field.field.name == 'cantA_3' %} <a href="residente3/" >Informacion de Residentes</a> {% endif %}
+	{% if field.field.name == 'cantA_4' %} <a href="residente4/" >Informacion de Residentes</a> {% endif %}
+	{% if field.field.name == 'jefeResidentes' %} <a href="jefeResidente/" >Informacion de Residentes</a> {% endif %}
+                        {{field.field}}
+                        {% endif %}
+                    {% endif %}
+                    {% if field.field.help_text %}
+                        <p class="help">{{ field.field.help_text|safe }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+</fieldset>

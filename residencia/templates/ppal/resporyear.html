@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Consultar residencias por año{% endblock %}
+{% block content %}
+{% if request.user.is_authenticated %}
+<h1>Consultar residencias por año</h1>
+<div style="right:200px">
+{% ifequal a 0 %}
+<form action={{link}} method="POST">{% csrf_token %}
+
+              <input type="submit" value="Consultar" /><br>
+     
+     
+            {{ form }}
+       
+   
+		
+</form>
+</div>
+{% else %}  
+<div >
+
+
+<a href=residencia.herokuapp.com/reporte/{{a}}>Consultar </a>    {{a}}</div>
+{% endifequal %}
+{% else %} <b>Debe loguearse para ver el contenido de esta p&aacute;gina   <br><a href='/login/'> Login </a></b> 
+
+
+{%endif%}
+
+ {% endblock %}

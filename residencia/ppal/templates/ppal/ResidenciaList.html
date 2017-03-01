@@ -1,0 +1,16 @@
+{% extends 'ppal/base.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+<h1>Residencias</h1>
+
+
+<ul>
+  {% for residencia in object_list %}
+    <li class="contact">{{ residencia }}</li>
+  {% endfor %}
+</ul>
+
+<a href="{% url "nueva-residencia" %}">Agregar Residencia</a>
+
+{% endblock %}

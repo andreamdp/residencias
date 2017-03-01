@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+<style type="text/css">
+#bottom_link{
+ vertical-align: bottom;
+}
+  </style>
+{% block page_title %}Lista de Residentes{% endblock %}
+{% block navmenu %}{% endblock %}
+{% block content %}
+    <h1> Listado de Residentes</h1>
+<br>
+  <a href="../listaR">Imprimir</a>
+  <script type="text/javascript">
+function imprSelec(muestra)
+{var ficha=document.getElementById(muestra);var ventimp=window.open(' ','popimpr');ventimp.document.write(ficha.innerHTML);ventimp.document.close();ventimp.print();ventimp.close();}
+</script>
+<div id='muestra' class="report_table" >
+   <table class="report_table" border= 1>
+      
+        <tbody >
+ 	{% for r in residencia %} 
+			<tr><td style="background-color:#E6E6FA"><span style="font-weight:bold">Cant. Residentes 1° Año</span></td><td>{{r.cantA_1}}</td>  </td><td style="background-color:#E6E6FA"><span style="font-weight:bold">Cant. Residentes 2° Año</span></td><td>{{r.cantA_2}}</td></tr>
+     		<tr><td style="background-color:#E6E6FA"><span style="font-weight:bold">Cant. Residentes 3° Año</span></td>
+     		<td>{{r.cantA_3}}</td>
+     		<td style="background-color:#E6E6FA"><span style="font-weight:bold">Cant. Residentes 4° Año</span></td><td>{{r.cantA_4}}</td></tr>
+     		<td> Jefe de Residentes: </td>
+						{% for residente in residentes %} 
+			              {% if residente.tipoR == 5  %}      <td>{{ residente.nombre }}</td>       <td>{{ residente.apellido }}</td>
+			              {% endif %}
+                        {% endfor %}
+     		</td>
+     {% endfor %} 
+       </tbody>
+        </table>
+    
+         {% if residentes %}
+          <br><br>
+          
+    <table class="report_table" border= 1>
+        <thead>
+            <tr>
+                <b><th>Nombre</th></b>
+                <th>Apellido</th>
+                <th>Año de Comienzo</th>
+                 <th>Año Residencia</th>
+                 <th>Modificar</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+          <div style="font-size:15px; font-weight:bold;text-align=center"> {{residentes.0.getEspecialidad}}, {{residentes.0.getInstitucion}}, Año:           {{residentes.0.residencia}}</div>
+					<tr><br>
+					  {% for residente in residentes %} 
+			            <td style="font-size:16px;text-align=center">{{ residente.nombre }}</td><td style="font-size:16px;text-align=center">{{ residente.apellido }}</td>
+                        <td style="font-size:16px;text-align=center">{{ residente.residencia }}</td> 
+                        <td style="font-size:16px;text-align=center">{% if residente.tipoR == 1  %} Residente 1° Año {% endif %}
+                        {% if residente.tipoR == 2  %} Residente 2° Año {% endif %}
+                        {% if residente.tipoR == 3  %} Residente 3° Año {% endif %}
+                        {% if residente.tipoR == 4  %} Residente 4° Año {% endif %}
+                        {% if residente.tipoR == 5  %} Jefe de Residentes {% endif %}
+                        </td>
+                        <td>
+						{% if residente.tipoR == 1  %}<a href="residente_edit1/{{ residente.id }}/"><img src="{{ MEDIA_URL }}/static/admin/img/icon_changelink.gif " />  </a> {% endif %}
+						{% if residente.tipoR == 2  %}<a href="residente_edit2/{{ residente.id }}/"><img src="{{ MEDIA_URL }}/static/admin/img/icon_changelink.gif " />  </a> {% endif %}
+						{% if residente.tipoR == 3  %}<a href="residente_edit3/{{ residente.id }}/"><img src="{{ MEDIA_URL }}/static/admin/img/icon_changelink.gif " />  </a> {% endif %}
+						{% if residente.tipoR == 4  %}<a href="residente_edit4/{{ residente.id }}/"><img src="{{ MEDIA_URL }}/static/admin/img/icon_changelink.gif " />  </a> {% endif %}						      </td> 
+                        <td> <a href="residente_delete/{{ residente.id }}/"><img src="{{ MEDIA_URL }}/static/admin/img/icon_deletelink.gif " />  </a> </td>     
+                      </tr>
+                      {% endfor %}
+                   </tr>
+         
+        {% endif %}
+        </tbody>
+        </table>
+        
+        </div>
+        <br><br>
+		
+			<div id="bottom_link">
+			<br>   <p>
+					<b> Atrás:</b> <a href="javascript:history.go(-1)">Volver </a>    </p>
+			</div>
+   
+{% endblock %}
+ 
+

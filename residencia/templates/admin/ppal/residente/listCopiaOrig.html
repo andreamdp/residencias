@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+<style type="text/css">
+#bottom_link{
+ vertical-align: bottom;
+}
+  </style>
+{% block page_title %}Lista de Residentes{% endblock %}
+{% block navmenu %}{% endblock %}
+{% block content %}
+    <h1> Listado de Residentes</h1>
+<br>
+  
+   <table class="report_table">
+      
+        <tbody>
+ 	{% for r in residencia %} 
+			<tr><td style="background-color:#E6E6FA"><span style="font-weight:bold">Cant. Residentes 1° Año</span></td><td>{{r.cantA_1}}</td>  </td><td style="background-color:#E6E6FA"><span style="font-weight:bold">Cant. Residentes 2° Año</span></td><td>{{r.cantA_2}}</td></tr>
+     		<tr><td style="background-color:#E6E6FA"><span style="font-weight:bold">Cant. Residentes 3° Año</span></td>
+     		<td>{{r.cantA_3}}</td>
+     		<td style="background-color:#E6E6FA"><span style="font-weight:bold">Cant. Residentes 4° Año</span></td><td>{{r.cantA_4}}</td></tr>
+     {% endfor %} 
+       </tbody>
+        </table>
+    
+         {% if residentes %}
+          
+          <div align=right>
+<div style='text-align:center;background:#086A87;width:100px;height:25px;' id="mainpage" align="center">
+ <a href="" onclick="window.print()"> 	<font color="white"><strong>Imprimir</strong></font></div></div></a>
+    <table class="report_table">
+        <thead>
+            <tr>
+                <b><th>Nombre</th></b>
+                <th>Apellido</th>
+                <th>Año de Comienzo</th>
+                 <th>Año Residencia</th>
+                 <th>Modificar</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+          <div style="font-size:15px; font-weight:bold;text-align=center"> {{residentes.0.getEspecialidad}}, {{residentes.0.getInstitucion}}, Año:           {{residentes.0.residencia}}</div>
+					<tr><br>
+					  {% for residente in residentes %} 
+			            <td>{{ residente.nombre }}</td>       <td>{{ residente.apellido }}</td>
+                        <td>{{ residente.residencia }}</td> 
+                        <td>{% if residente.tipoR == 1  %} Residente 1° Año {% endif %}
+                        {% if residente.tipoR == 2  %} Residente 2° Año {% endif %}
+                        {% if residente.tipoR == 3  %} Residente 3° Año {% endif %}
+                        {% if residente.tipoR == 4  %} Residente 4° Año {% endif %}
+                        {% if residente.tipoR == 5  %} Jefe de Residentes {% endif %}
+                        </td>
+                        <td>	    <a href="residente_edit/{{ residente.id }}/"><img src="{{ MEDIA_URL }}/static/admin/img/icon_changelink.gif " />  </a>      </td> 
+                        <td> <a href="residente_delete/{{ residente.id }}/"><img src="{{ MEDIA_URL }}/static/admin/img/icon_deletelink.gif " />  </a> </td>     
+                      </tr>
+                      {% endfor %}
+                   </tr>
+                 
+            
+        {% endif %}
+        </tbody>
+        </table>
+        <br><br>
+		<div class="pagination">
+		<span class="step-links">
+        {% if residentes.has_previous %}
+            <a href="?page={{ residentes.previous_page_number }}">previo</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ residentes.number }} of {{ residentes.paginator.num_pages }}.
+        </span>
+
+        {% if residentes.has_next %}
+            <a href="?page={{ residentes.next_page_number }}">Siguiente</a>
+        {% endif %}
+    </span>
+
+
+ <div id="bottom_link">
+<br>
+
+  
+   <p>
+       <b> Atrás:</b> <a href="javascript:history.go(-2)">Volver </a>
+    </p>
+   
+  
+  
+
+
+</div>
+   
+{% endblock %}
+ 
+

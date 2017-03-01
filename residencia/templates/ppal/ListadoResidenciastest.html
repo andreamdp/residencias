@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block page_title %}Listado de Residencias {% endblock %}
+{% block navmenu %}{% endblock %}
+{% block content %}
+    <h1> Listado de Residencias - {{titulo}} </h1>
+<br>
+  <div align="right"><a href={{milink}}>Imprimir</a></div>
+ <table class="report_table" border= 1>
+  <tbody >
+<tr>
+<td style="background-color:#E6E6FA"><span style="font-size:16px;font-weight:bold">  Año de <br> comienzo </span></td>
+<td style="background-color:#E6E6FA"><span style="font-size:16px;font-weight:bold">Especialidad</span></td>
+<td style="background-color:#E6E6FA"><span style="font-size:16px;font-weight:bold">Instituci&oacute;n</span></td>
+<td style="background-color:#E6E6FA"><span style="font-size:16px;font-weight:bold">Fecha de <br> Evaluaci&oacute;n</span></td>
+<td style="background-color:#E6E6FA"><span style="font-size:16px;font-weight:bold">Coordinador</span></td>
+<td style="background-color:#E6E6FA"><span style="font-size:16px;font-weight:bold">Jefe de Docencia</span></td>
+<td style="background-color:#E6E6FA"><span style="font-size:16px;font-weight:bold">Jefe de Servicio</span></td>
+<td style="background-color:#E6E6FA"><span style="font-size:16px;font-weight:bold">Jefe de Residentes</span></td>
+<td style="background-color:#E6E6FA"><span style="font-size:16px;font-weight:bold">Año 1</span></td>
+<td style="background-color:#E6E6FA"><span style="font-size:16px;font-weight:bold">Año 2</span></td>
+<td style="background-color:#E6E6FA"><span style="font-size:16px;font-weight:bold">Año 3</span></td>
+<td style="background-color:#E6E6FA"><span style="font-size:16px;font-weight:bold">Año 4</span></td>
+<td style="background-color:#E6E6FA"><span style="font-size:16px;font-weight:bold">Total</span></td>
+</tr>
+ {% for residencia in residencias %}
+ <tr>
+<td style="background-color:#E6E6FA"><span style="font-size:16px;font-weight:bold">{{residencia.a_Comienzo}} </span></td><td style="font-size:14px;text-align=center"> <a href=../ppal/residenciaaut/{{residencia.id}}/lista/>{{residencia.especialidad}}</a></td><td style="font-size:14px;text-align=center"> {{residencia.institucion}}</span></td><td style="font-size:14px;text-align=center">{{residencia.fechaEvalNoNula}}</td><td style="font-size:14px;text-align=center">{{residencia.coordinador}}</td><td style="font-size:14px;text-align=center">{{residencia.getJefeDocencia}}</td><td style="font-size:14px;text-align=center">{{residencia.getJefeServicio}}</td><td style="font-size:14px;text-align=center">{{residencia.jefeResidentes}}</td><td style="font-size:14px;text-align=center">{{residencia.cantA_1}}</td><td style="font-size:14px;text-align=center">{{residencia.cantA_2}}</td><td style="font-size:14px;text-align=center">{{residencia.cantA_3}}</td><td style="font-size:14px;text-align=center">{{residencia.cantA_4}}</td><td style="font-size:14px;text-align=center">{{residencia.sumaCantA}}</td></tr> 
+       {% endfor %}
+         <tr><td>Total General</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>{{ suma1.cantA_1__sum }}</td><td>{{ suma2.cantA_2__sum }}</td><td>{{ suma3.cantA_3__sum }}</td><td>{{ suma4.cantA_4__sum }}</td><td>{{ sumatotal }}</td> </tr>
+        </tbody>
+        </table>
+
+{% endblock %}

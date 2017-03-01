@@ -1,0 +1,51 @@
+{% extends 'ppal/base.html' %}
+{% load bootstrap3 %}
+{% block content %}
+
+{% if request.user.is_authenticated %}Hola! '{{ request.user.username }}'
+
+<form action="" method="post">{% csrf_token %}
+    {% csrf_token %}
+  <ul>
+	 
+	 <div class="container">
+       <table BORDER=10 BORDERCOLOR=BLUE width="100%">
+        <tr width="100%">
+        <td width="60%"><label for="expediente">N° de Expediente del Ministerio de Salud:( ####-####/##): </label> {{ form.expediente }}</td>
+        <td width="10%"> <label for="año">Año:</label> {{ form.a_Comienzo }} </td>
+       </tr>
+       
+       <tr width="100%"> 
+       <td width="60%" style="padding:10px;"><label for="especialidad">Especialidad: </label> {{ form.especialidad }}</div> </td>
+        <td width="20%" style="padding:10px;"><div style="float: left;"> <label for="institucion">Institucion:</label> {{ form.institucion }}</div></td>
+        </tr>
+       </table>
+    
+    <table BORDER=10 BORDERCOLOR=BLUE>
+        <td width="10%" style="padding:10px;"><label for="PrimerAño">1° Año: </label> {{ form.cantA_1 }}</div> 
+        <td width="10%" style="padding:10px;"><label for="SegundoAño">2° Año::</label> {{ form.cantA_2 }}</div>
+        <td width="10%" style="padding:10px;"> <label for="TercerAño">3° Año::</label> {{ form.cantA_3 }}</div>
+        <td width="10%" style="padding:10px;"><label for="CuartoAño">4° Año::</label> {{ form.cantA_4 }}</div>
+        <td width="10%" style="padding:10px;"><label for="jefeR">Jefe de Residentes:</label> {{ form.jefeResidentes }}</div>
+    </table>
+   <table BORDER=10 BORDERCOLOR=BLUE>
+        <td width="10%" style="padding:10px;"><label for="jServicio">Jefe de Servicio: </label> {{ form.jefeServicio }}</div> 
+        <td width="10%" style="padding:10px;"><label for="jDocencia">Jefe de Docencia:</label> {{ form.jefedocencia }}</div>
+        <td width="10%" style="padding:10px;"> <label for="Coordinador">Coordinador:</label> {{ form.coordinador }}</div>
+        <td width="10%" style="padding:10px;"><label for="asesorDocente">Asesor Docente:</label> {{ form.asesorDocente }}</div>
+        <td width="10%" style="padding:10px;"><label for="instructor">Instructor de Residentes:</label> {{ form.instructor }}</div>
+    </table>
+    <table BORDER=10 BORDERCOLOR=RED>
+        <td width="10%" style="padding:10px;"><label for="jServicio">Fecha de Evaluaci&oacute;n: </label> {{ form.fechaEvaluacColMed }}</div> 
+        <td width="10%" style="padding:10px;"><label for="jServicio">Fecha de Vencimiento Acreditación: </label> {{ form.fechaCeseActividad }}</div> 
+    </table>
+    
+     <table BORDER=10 BORDERCOLOR=BLUE>
+        <td width="100%" style="padding:20px;"><label for="memo">Memo: </label> {{ form.memo }}</div> 
+    </table>    
+  </ul>
+    <input type="submit" value="Update" />
+</form>
+{% else %}<a href="{% url 'django.contrib.auth.views.login' %}">Login</a>{% endif %}
+
+{% endblock %}

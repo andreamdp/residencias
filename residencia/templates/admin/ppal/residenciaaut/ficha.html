@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+<style type="text/css">
+#bottom_link{
+ vertical-align: bottom;
+}
+  </style>
+{% block page_title %}{% endblock %}
+{% block navmenu %}{% endblock %}
+{% block content %}
+<br>
+  <a href="javascript:imprSelec('muestra')">Imprimir</a>
+  <script type="text/javascript">
+function imprSelec(muestra)
+{var ficha=document.getElementById(muestra);var ventimp=window.open(' ','popimpr');ventimp.document.write(ficha.innerHTML);ventimp.document.close();ventimp.print();ventimp.close();}
+</script>
+<br>
+   <tbody >
+ 	
+   <div id='muestra'>
+   <table class="report_table" border=1>
+	   <tr><td style="background-color:#E6E6FA"><span style="font-weight:bold">Nro. Interno</span></td><td>{{residencia.id}}</td> </td>
+	   <td style="background-color:#E6E6FA"><span style="font-weight:bold">N° de Expediente del Ministerio de Salud:</span></td><td>{{residencia.expediente}}</td>
+	   <td style="background-color:#E6E6FA"><span style="font-weight:bold">Año:</span></td><td>{{residencia.a_Comienzo}}</td>
+	   </tr>
+	   <tr> <td style="background-color:#E6E6FA"><span style="font-weight:bold">Especialidad:</span></td><td>{{residencia.getEspecialidad}}</td>
+	   <td style="background-color:#E6E6FA"><span style="font-weight:bold"> Instituci&oacute;n</span></td><td>{{residencia.getInstitucion}}</td><td>
+	   </tr>
+   </table> 	   
+  
+  <table class="report_table" border= 1>
+	  <br>
+	  <div><b>RESIDENTES</b></div>
+			<tr><td style="background-color:#E6E6FA"><span style="font-weight:bold">Cant. Residentes 1° Año</span></td><td>{{residencia.cantA_1}} </td><td style="background-color:#E6E6FA"><span style="font-weight:bold">Cant. Residentes 2° Año</span></td><td>{{residencia.cantA_2}}</td></tr>
+     		<tr><td style="background-color:#E6E6FA"><span style="font-weight:bold">Cant. Residentes 3° Año</span></td><td>{{residencia.cantA_3}}</td>
+     		<td style="background-color:#E6E6FA"><span style="font-weight:bold">Cant. Residentes 4° Año</span></td><td>{{residencia.cantA_4}}</td></tr>
+   
+       </table>
+    
+    <br>
+  <table class="report_table" border= 1>
+       <div><b>PROFESIONALES</b></div>
+			<tr><td style="background-color:#E6E6FA"><span style="font-weight:bold">Jefe de Servcio:</span></td><td>{{residencia.getjefeServicio}} </td><td style="background-color:#E6E6FA"><span style="font-weight:bold">Jefe de Docencia:</span></td><td>{{residencia.getJefeDocencia}}</td></tr>
+     		<tr><td style="background-color:#E6E6FA"><span style="font-weight:bold">Coordinador:</span></td><td>{{residencia.getcoordinador}}</td><td style="background-color:#E6E6FA"><span style="font-weight:bold">Asesor Docente:</span></td><td>{{residencia.getAsesorDocente}}</td></tr>
+     		<tr><td style="background-color:#E6E6FA"><span style="font-weight:bold">Instructor de Residentes:</span></td><td>{{residencia.getinstructor}}</td></tr>
+   
+       </table>
+  <br>   
+  <table class="report_table" border= 1>
+       <div><b>EVALUACIONES</b></div>
+			<tr><td style="background-color:#E6E6FA"><span style="font-weight:bold">Fecha de Evaluaci&oacute;n:</span></td><td>{{residencia.fechaEvalNoNula}}</td>
+     		<td style="background-color:#E6E6FA"><span style="font-weight:bold">Tipo:</span></td><td>{{residencia.nombreTipo}}</td>
+     		<td style="background-color:#E6E6FA"><span style="font-weight:bold">Fecha de Vencimiento Acreditación:</span></td><td>{{residencia.fechaCeseActividadNoNula}}</td></tr>
+   
+       </table>
+      <br>   
+       <table class="report_table" border= 1>
+       <div><b>CONCLUSIONES Y RECOMENDACIONES</b></div>
+			<tr><td style="background-color:#E6E6FA"><span style="font-weight:bold"></span></td><td>{{residencia.memoNoNulo}} </td></tr>
+       </table>
+  </tbody>    
+        </div>
+        <br><br>
+		
+			<div id="bottom_link">
+			<br>   <p>
+					<b> Atrás:</b> <a href="javascript:history.go(-1)">Volver </a>    </p>
+			</div>
+   
+{% endblock %}
+ 
+

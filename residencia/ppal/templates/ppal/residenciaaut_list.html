@@ -1,0 +1,45 @@
+{% extends 'ppal/base.html' %}
+{% load bootstrap3 %}
+{% load bootstrap_pagination %}
+{% load staticfiles %}
+{% block content %}
+   {% if request.user.is_authenticated %}Hola! '{{ request.user.username }}'
+   {% if residencia_list %}
+    <table id="cars">
+        {% for r in residencia_list %}
+            <tr>				
+                <td><a href="/edita/{{r.id}}" class="see_detail">{{r.id}}</a></td>
+                <td>{{ r.a_Comienzo }}</td>
+                <td>{{ r.expediente }}</td>
+                <td><a href="" class="see_detail">detail</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    {# .... **Now the pagination section** .... #}
+    {% if is_paginated %}
+        hello
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                   <a href="?page={{ page_obj.previous_page_number }}">Previos</a
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                   <a href="?page={{ page_obj.next_page_number }}">Siguientes</a
+                {% endif %}
+            </span>
+        </div>
+    {% endif %}
+{% else %}
+    <h3>My Cars</h3>
+    <p>No cars found!!! :(</p>
+{% endif %}
+
+
+
+{% else %}<a href="{% url 'django.contrib.auth.views.login' %}">Login</a>{% endif %}
+{% endblock %}
+
+{% block content_bottom %}{% endblock content_bottom %}

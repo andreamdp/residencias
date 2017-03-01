@@ -1,0 +1,58 @@
+{% extends 'ppal/base.html' %}
+{% load bootstrap3 %}
+{% block content %}
+
+{% if request.user.is_authenticated %}Hola! '{{ request.user.username }}'
+
+<h1>Agregar Residencia</h1>
+
+<form action="{% url "nueva-residencia" %}" method="POST">
+  {% csrf_token %}
+  <ul>
+	 
+	 <div class="container">
+       <table BORDER=10 BORDERCOLOR=BLUE width="100%">
+        <tr width="100%">
+        <td width="60%"><label for="expediente">N° de Expediente del Ministerio de Salud:( ####-####/##): </label> </td>
+        <td width="10%"> <label for="año">Año:</label> </td>
+       </tr>
+       
+       <tr width="100%"> 
+       <td width="60%" style="padding:10px;"><label for="especialidad">Especialidad: </label></div> </td>
+        <td width="20%" style="padding:10px;"><div style="float: left;"> <label for="institucion">Institucion:</label> </div></td>
+        </tr>
+       </table>
+    
+    <table BORDER=10 BORDERCOLOR=BLUE>
+        <td width="10%" style="padding:10px;"><label for="PrimerAño">1° Año: </label> </div> 
+        <td width="10%" style="padding:10px;"><label for="SegundoAño">2° Año::</label></div>
+        <td width="10%" style="padding:10px;"> <label for="TercerAño">3° Año::</label> </div>
+        <td width="10%" style="padding:10px;"><label for="CuartoAño">4° Año::</label> </div>
+        <td width="10%" style="padding:10px;"><label for="jefeR">Jefe de Residentes:</label> </div>
+    </table>
+   <table BORDER=10 BORDERCOLOR=BLUE>
+        <td width="10%" style="padding:10px;"><label for="jServicio">Jefe de Servicio: </label> </div> 
+        <td width="10%" style="padding:10px;"><label for="jDocencia">Jefe de Docencia:</label> </div>
+        <td width="10%" style="padding:10px;"> <label for="Coordinador">Coordinador:</label> </div>
+        <td width="10%" style="padding:10px;"><label for="asesorDocente">Asesor Docente:</label> </div>
+        <td width="10%" style="padding:10px;"><label for="instructor">Instructor de Residentes:</label> </div>
+    </table>
+    <table BORDER=10 BORDERCOLOR=RED>
+        <td width="10%" style="padding:10px;"><label for="jServicio">Fecha de Evaluaci&oacute;n: </label> </div> 
+        <td width="10%" style="padding:10px;"><label for="jServicio">Fecha de Vencimiento Acreditación: </label> </div> 
+    </table>
+    
+     <table BORDER=10 BORDERCOLOR=BLUE>
+        <td width="100%" style="padding:20px;"><label for="memo">Memo: </label> </div> 
+    </table>    
+  </ul>
+  <input id="save_residenciaaut" type="submit" value="Guardar" />
+
+</form>
+
+<a href="{% url "residencia-list" %}">Volver</a>
+
+
+{% else %}<a href="{% url 'django.contrib.auth.views.login' %}">Login</a>{% endif %}
+
+{% endblock %}
